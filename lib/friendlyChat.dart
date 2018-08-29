@@ -169,4 +169,4 @@ class ChatMessage extends StatelessWidget {
   }
 }
 
-void main() => runApp(new FriendlyChat());
+//void main() => runApp(new FriendlyChat());
