@@ -1,109 +1,109 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/animationList.dart';
+import 'package:flutter_app/appBarBottomWidget.dart';
+import 'package:flutter_app/basicAppBar.dart';
+import 'package:flutter_app/expansionTiles.dart';
+import 'package:flutter_app/friendlyChat.dart';
+import 'package:flutter_app/helloword.dart';
+import 'package:flutter_app/myAppA.dart';
+import 'package:flutter_app/navigation.dart';
+import 'package:flutter_app/testChannel.dart';
 
-//void main() => runApp(new MyApp());
-
-class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
-  @override
-  Widget build(BuildContext context) {
-    return new MaterialApp(
-      title: 'Flutter Demo',
-      theme: new ThemeData(
-        // This is the theme of your application.
-        //
-        // Try running your application with "flutter run". You'll see the
-        // application has a blue toolbar. Then, without quitting the app, try
-        // changing the primarySwatch below to Colors.green and then invoke
-        // "hot reload" (press "r" in the console where you ran "flutter run",
-        // or press Run > Flutter Hot Reload in IntelliJ). Notice that the
-        // counter didn't reset back to zero; the application is not restarted.
-        primarySwatch: Colors.blue,
-      ),
-      home: new MyHomePage(title: 'Flutter Demo Home Page'),
-    );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
-
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
-
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
+class ItemModel {
+  const ItemModel({this.title, this.route});
 
   final String title;
-
-  @override
-  _MyHomePageState createState() => new _MyHomePageState();
+  final Route route;
 }
 
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
+class RootList extends StatelessWidget {
+  final List<ItemModel> _items = [];
 
-  void _incrementCounter() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter--;
-    });
+  _getItems() {
+    _items.clear();
+    _items.add(new ItemModel(
+        title: 'animationList',
+        route: MaterialPageRoute(
+            builder: (BuildContext context) => AnimationList())));
+    _items.add(new ItemModel(
+        title: 'appBarBottomWidget',
+        route: MaterialPageRoute(
+            builder: (BuildContext context) => AppBarBottom())));
+    _items.add(new ItemModel(
+        title: 'basicAppBar',
+        route: MaterialPageRoute(
+            builder: (BuildContext context) => BasicAppBar())));
+    _items.add(new ItemModel(
+        title: 'expansionTiles',
+        route: MaterialPageRoute(
+            builder: (BuildContext context) => ExpansionTiles())));
+    _items.add(new ItemModel(
+        title: 'friendlyChat',
+        route: MaterialPageRoute(
+            builder: (BuildContext context) => FriendlyChat())));
+    _items.add(new ItemModel(
+        title: 'main',
+        route: MaterialPageRoute(builder: (BuildContext context) => MyApp())));
+    _items.add(new ItemModel(
+        title: 'myApp',
+        route: MaterialPageRoute(builder: (BuildContext context) => MyAppA())));
+    _items.add(new ItemModel(
+        title: 'navigation bottom',
+        route: MaterialPageRoute(
+            builder: (BuildContext context) => Navigation())));
+    _items.add(new ItemModel(
+        title: 'testChannel',
+        route: MaterialPageRoute(
+            builder: (BuildContext context) => TestChannel())));
+  }
+
+  String _getItemTitle(int index) {
+    return _items[index].title;
+  }
+
+  Route _getItemRoute(int index) {
+    return _items[index].route;
+  }
+
+  void _onTap(BuildContext context, int index) {
+    Navigator.push(context, _getItemRoute(index));
   }
 
   @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
-    return new Scaffold(
-      appBar: new AppBar(
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        title: new Text(widget.title),
-      ),
-      body: new Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
-        child: new Column(
-          // Column is also layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Invoke "debug paint" (press "p" in the console where you ran
-          // "flutter run", or select "Toggle Debug Paint" from the Flutter tool
-          // window in IntelliJ) to see the wireframe for each widget.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            new Text(
-              'You have pushed the button this many times:',
-            ),
-            new Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.display1,
-            ),
-          ],
+    _getItems();
+    return MaterialApp(
+      home: Scaffold(
+        appBar: AppBar(
+          title: const Text('RootList'),
         ),
+//        body: ListView.builder(
+//            padding: new EdgeInsets.all(8.0),
+//            itemExtent: 40.0,
+//            itemCount: _items.length,
+//            itemBuilder: (BuildContext context, int index) {
+//              print(_getItemTitle(index));
+//              return new Text('${_getItemTitle(index)}');
+//            }),
+        body: ListView.separated(
+            padding: new EdgeInsets.all(8.0),
+            itemBuilder: (BuildContext context, int index) {
+              print(_getItemTitle(index));
+              return GestureDetector(
+                onTap: () => _onTap(context, index),
+                child: Column(
+                  children: <Widget>[
+                    new Text('${_getItemTitle(index)}'),
+                  ],
+                ),
+              );
+            },
+            separatorBuilder: (BuildContext context, int index) =>
+                new Divider(),
+            itemCount: _items.length),
       ),
-      floatingActionButton: new FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: new Icon(Icons.account_balance),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }
+
+void main() => runApp(new RootList());
