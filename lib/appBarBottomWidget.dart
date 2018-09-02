@@ -31,46 +31,46 @@ class _AppBarBottomState extends State<AppBarBottom>
   Widget build(BuildContext context) {
     return MaterialApp(
         home: Scaffold(
-      appBar: AppBar(
-        title: const Text('Appbar Bottem Widget'),
-        leading: IconButton(
-          tooltip: 'Previous choice',
-          icon: const Icon(Icons.arrow_back),
-          onPressed: () {
-            _nextPage(-1);
-          },
-        ),
-        actions: <Widget>[
-          IconButton(
-            icon: const Icon(Icons.arrow_forward),
-            tooltip: 'Next choice',
-            onPressed: () {
-              _nextPage(1);
-            },
-          ),
-        ],
-        bottom: PreferredSize(
-          preferredSize: const Size.fromHeight(48.0),
-          child: Theme(
-            data: Theme.of(context).copyWith(accentColor: Colors.white),
-            child: Container(
-              height: 48.0,
-              alignment: Alignment.center,
-              child: TabPageSelector(controller: _tabController),
+          appBar: AppBar(
+            title: const Text('Appbar Bottem Widget'),
+            leading: IconButton(
+              tooltip: 'Previous choice',
+              icon: const Icon(Icons.arrow_back),
+              onPressed: () {
+                _nextPage(-1);
+              },
+            ),
+            actions: <Widget>[
+              IconButton(
+                icon: const Icon(Icons.arrow_forward),
+                tooltip: 'Next choice',
+                onPressed: () {
+                  _nextPage(1);
+                },
+              ),
+            ],
+            bottom: PreferredSize(
+              preferredSize: const Size.fromHeight(48.0),
+              child: Theme(
+                data: Theme.of(context).copyWith(accentColor: Colors.white),
+                child: Container(
+                  height: 48.0,
+                  alignment: Alignment.center,
+                  child: TabPageSelector(controller: _tabController),
+                ),
+              ),
             ),
           ),
-        ),
-      ),
-      body: TabBarView(
-        controller: _tabController,
-        children: choices.map((Choice choice) {
-          return Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: ChoiceCard(choice: choice),
-          );
-        }).toList(),
-      ),
-    ));
+          body: TabBarView(
+            controller: _tabController,
+            children: choices.map((Choice choice) {
+              return Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: ChoiceCard(choice: choice),
+              );
+            }).toList(),
+          ),
+        ));
   }
 }
 

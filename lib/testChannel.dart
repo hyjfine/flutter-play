@@ -75,6 +75,6 @@ class _PlatformChannelState extends State<TestChannel> {
   }
 }
 
-void main() {
-  runApp(new MaterialApp(home: new TestChannel()));
-}
+//void main() {
+//  runApp(new MaterialApp(home: new TestChannel()));
+//}
