@@ -48,7 +48,7 @@ class RootList extends StatelessWidget {
         title: 'myApp',
         route: MaterialPageRoute(builder: (BuildContext context) => MyAppA())));
     _items.add(new ItemModel(
-        title: 'navigation bottom',
+        title: 'bottomNavigationBar',
         route: MaterialPageRoute(
             builder: (BuildContext context) => Navigation())));
     _items.add(new ItemModel(
@@ -77,25 +77,16 @@ class RootList extends StatelessWidget {
         appBar: AppBar(
           title: const Text('RootList'),
         ),
-//        body: ListView.builder(
-//            padding: new EdgeInsets.all(8.0),
-//            itemExtent: 40.0,
-//            itemCount: _items.length,
-//            itemBuilder: (BuildContext context, int index) {
-//              print(_getItemTitle(index));
-//              return new Text('${_getItemTitle(index)}');
-//            }),
         body: ListView.separated(
-            padding: new EdgeInsets.all(8.0),
+            padding: new EdgeInsets.all(16.0),
             itemBuilder: (BuildContext context, int index) {
               print(_getItemTitle(index));
-              return GestureDetector(
-                onTap: () => _onTap(context, index),
-                child: Column(
-                  children: <Widget>[
-                    new Text('${_getItemTitle(index)}'),
-                  ],
-                ),
+              return RawMaterialButton(
+                child: Text('${_getItemTitle(index)}'),
+                onPressed: () => _onTap(context, index),
+                materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                padding: EdgeInsets.all(16.0),
+                constraints: BoxConstraints(minWidth: 0.0, minHeight: 0.0),
               );
             },
             separatorBuilder: (BuildContext context, int index) =>
